@@ -49,7 +49,33 @@ def Delta(i, j, alpha, theta):
         return crunch
     return -crunch
 
-
+# -------------------calcula a vizinhanca de um pixel de acordo com o parâmetro u---------------------------
+# cria uma lista 2d e inicializa com zeros
+vizinhanca = np.zeros((width, height))
+# garante que a vizinhança está nos limites da imagem
+for i in range(0, height):
+    for j in range(0, width):
+        if (i - u) >= 0:
+            viz_cima = i - u
+        else:
+            viz_cima = 0
+        if (i + u) <= (height - 1):
+            viz_baixo = i + u
+        else:
+            viz_baixo = height - 1
+        if (j - u) >= 0:
+            viz_esq = j - u
+        else:
+            viz_esq = 0
+        if (j + u) <= (width - 1):
+            viz_dir = j + u
+        else:
+            viz_dir = width - 1
+        for k in range(viz_esq, viz_dir+1):
+            for z in range(viz_cima, viz_baixo+1):
+                # garante que o pixel central nao é contado
+                if i * width + j != k * width + z:
+                    vizinhanca[i][j] += 1
 
 
 
